@@ -1,30 +1,22 @@
-```
- __          __  _                             __                     
- \ \        / / | |                           / _|                    
-  \ \  /\  / /__| | ___ ___  _ __ ___   ___  | |_ _ __ ___  _ __ ___  
-   \ \/  \/ / _ \ |/ __/ _ \| '_ ` _ \ / _ \ |  _| '__/ _ \| '_ ` _ \ 
-    \  /\  /  __/ | (_| (_) | | | | | |  __/ | | | | | (_) | | | | | |
-     \/  \/ \___|_|\___\___/|_| |_| |_|\___| |_| |_|  \___/|_| |_| |_|
-                                                                      
-                                                                      
-  ______            _                 __     __                ____                ____                    _         
- |  ____|          | |                \ \   / /               |  _ \              |  _ \                  | |        
- | |__  __  ___ __ | | ___  _ __ ___   \ \_/ /__  _   _ _ __  | |_) |_   _  __ _  | |_) | ___  _   _ _ __ | |_ _   _ 
- |  __| \ \/ / '_ \| |/ _ \| '__/ _ \   \   / _ \| | | | '__| |  _ <| | | |/ _` | |  _ < / _ \| | | | '_ \| __| | | |
- | |____ >  <| |_) | | (_) | | |  __/    | | (_) | |_| | |    | |_) | |_| | (_| | | |_) | (_) | |_| | | | | |_| |_| |
- |______/_/\_\ .__/|_|\___/|_|  \___|    |_|\___/ \__,_|_|    |____/ \__,_|\__, | |____/ \___/ \__,_|_| |_|\__|\__, |
-             | |                                                            __/ |                               __/ |
-             |_|                                                           |___/                               |___/ 
-```
-  
 ## Django Debug Mode with Nuclei
+
 ##### Today Topic will be "How to find Django Debug Mode with Nuclei". 
-##### It is easy to find bug. This vulnerability still exists in subdomains of bug bounty sites. I also have found this bug once in an vulnerability disclosure program. Let's Start !
+##### It is easy to find bug. This vulnerability still exists in subdomains of bug bounty sites. It can expose sensitive data like database password, unauthenticated access and RCE. I also have found this bug once in an vulnerability disclosure program. Let's Start !
 
 #### Bug Bounty Tips
 ```
 - If you learn a new vulnerability, do research detail, try to understand how it works and imagine scenarios.
 - If you found a vulnerability in a target, try to create nuclei template for this and add in your recon. 
+```
+
+#### How Django Debug Mode Work?
+```
+Typically, debug mode enabling is purposed for developer to trace errors while website testing.
+When website raise unexpected error, detail information of website status will show in frontend if debud mode is enabled.
+So, to detect a django website is enabled debug mode or not, we just need to send error request like 404 not found.
+Eg - Target is https://redacted.com/. Request to https://redacted.com/abcd123 via browser.
+   - If /abcd123 is not existed in redacted.com, it will show 404 not found.
+   - At that time, if debug mode is enable, other confidential information will leak with this error. 
 ```
 
 #### Dorks
@@ -47,5 +39,8 @@ var ipElements=document.querySelectorAll('strong');var ips=[];ipElements.forEach
 ```
 #### Nuclei Scanning
 ```
+# My Template URL
+https://github.com/Pr0t0c01/Custom-Nuclei-Templates/blob/main/misconfig/debug/django-debug-mode.yaml
+
 nuclei -l targets.txt -t <path/nuclei-template>.yaml -o vulnerable-targets.txt
 ```

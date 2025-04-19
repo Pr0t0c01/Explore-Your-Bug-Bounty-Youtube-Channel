@@ -44,3 +44,5 @@ https://github.com/Pr0t0c01/Custom-Nuclei-Templates/blob/main/misconfig/debug/dj
 
 nuclei -l targets.txt -t <path/nuclei-template>.yaml -o vulnerable-targets.txt
 ```
+#### Youtube Video
+[Will Update Soon](youtube)

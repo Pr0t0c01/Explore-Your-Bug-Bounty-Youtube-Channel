@@ -12,7 +12,7 @@
 #### How Django Debug Mode Work?
 ```
 Typically, debug mode enabling is purposed for developer to trace errors while website testing.
-When website raise unexpected error, detail information of website status will show in frontend if debud mode is enabled.
+When website raise unexpected error, detail information of website status will show in frontend if debug mode is enabled.
 So, to detect a django website is enabled debug mode or not, we just need to send error request like 404 not found.
 Eg - Target is https://redacted.com/. Request to https://redacted.com/abcd123 via browser.
    - If /abcd123 is not existed in redacted.com, it will show 404 not found.

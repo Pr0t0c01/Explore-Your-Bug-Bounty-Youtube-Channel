@@ -19,7 +19,7 @@ FOFA
 
 #### Download
 ```
-You can download result data as csv in FOFA.
+You can download result data as csv in FOFA. And then save IP and Ports only as targets.txt
 ```
 
 #### Nuclei Scanning
